@@ -276,6 +276,9 @@ function startExperience() {
     anleitung.classList.remove("fade-in");
     anleitung.classList.add("fade-out");
 
+    const hilfeButton = document.getElementById("hilfeButton");
+    hilfeButton.style.display = "block";
+
     // Nach der Übergangszeit (500ms), Anleitung ausblenden und Eingabe anzeigen
     setTimeout(() => {
         anleitung.style.display = "none";
@@ -284,5 +287,15 @@ function startExperience() {
         userInput.classList.add("fade-in");
     }, 500);
 }
+
+document.getElementById("hilfeButton").addEventListener("click", () => {
+    const anleitung = document.getElementById("AnleitungContainer");
+    anleitung.style.display = "block";
+
+    // Optional: Button ausblenden, solange die Anleitung offen ist
+    document.getElementById("hilfeButton").style.display = "none";
+
+    // Wenn die Anleitung wieder geschlossen wird (z. B. bei "Start"), erscheint er wieder
+});
 
 window.startExperience = startExperience;
