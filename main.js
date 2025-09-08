@@ -288,14 +288,30 @@ function startExperience() {
     }, 500);
 }
 
-document.getElementById("hilfeButton").addEventListener("click", () => {
-    const anleitung = document.getElementById("AnleitungContainer");
-    anleitung.style.display = "block";
+function showAnleitung() {
+    anleitung.style.display = 'block';
+    anleitung.style.zIndex  = '2000';     // sicher über allem
+    anleitung.classList.remove('fade-out');
+    anleitung.classList.add('fade-in');
+    hilfeButton.style.display = 'none';
+}
 
-    // Optional: Button ausblenden, solange die Anleitung offen ist
-    document.getElementById("hilfeButton").style.display = "none";
+function hideAnleitung() {
+    anleitung.classList.remove('fade-in');
+    anleitung.classList.add('fade-out');
+    // Warte kurz bis die Transition fertig ist, dann ausblenden
+    setTimeout(() => {
+      anleitung.style.display = 'none';
+      hilfeButton.style.display = 'block';
+    }, 300); // muss zu deiner CSS-Transition passen
+}
 
-    // Wenn die Anleitung wieder geschlossen wird (z. B. bei "Start"), erscheint er wieder
+hilfeButton.addEventListener('click', showAnleitung);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && anleitung.style.display !== 'none') {
+        hideAnleitung();
+    }
 });
 
 window.startExperience = startExperience;
