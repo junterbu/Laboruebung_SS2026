@@ -303,6 +303,22 @@
         text-align: left; font-family: 'Arial', sans-serif; max-width: 600px; z-index: 2000;">
 
         <h2 style="text-align: center; color: #333;">Willkommen im virtuellen Asphaltlabor</h2>
+
+        <button id="anleitungClose" style="
+        display:none;
+        position:absolute;
+        top:10px;
+        right:10px;
+        width:32px;
+        height:32px;
+        border:none;
+        border-radius:16px;
+        background:#eee;
+        cursor:pointer;
+        font-size:16px;
+        line-height:32px;
+        text-align:center;
+        ">×</button>
         
         <p style="font-size: 15px; color: #333;">
             Diese Plattform ermöglicht Ihnen die praktische Simulation der Erstellung einer Asphaltmischung. 
@@ -421,6 +437,59 @@
         scene.add(toMarshallMarker);
         scene.add(leaveMarshall);
 
+    </script>
+    <script>
+        (() => {
+        const anleitung     = document.getElementById('AnleitungContainer');
+        const hilfeButton   = document.getElementById('hilfeButton');
+        const closeButton   = document.getElementById('anleitungClose');
+        const startBtn      = anleitung?.querySelector('button[onclick="startExperience()"]');
+
+        let openedFromHelp = false;
+
+        function showAnleitung(fromHelp = false) {
+            openedFromHelp = fromHelp;
+
+            // Sichtbarkeit der Buttons im Container steuern
+            if (startBtn)   startBtn.style.display   = fromHelp ? 'none'  : 'inline-block';
+            if (closeButton) closeButton.style.display = fromHelp ? 'inline-block' : 'none';
+
+            anleitung.style.display = 'block';
+            anleitung.classList.remove('fade-out');
+            anleitung.classList.add('fade-in');
+
+            if (hilfeButton) hilfeButton.style.display = 'none';
+        }
+
+        function hideAnleitung() {
+            // Nur sanft schließen, niemals startExperience hier aufrufen!
+            anleitung.classList.remove('fade-in');
+            anleitung.classList.add('fade-out');
+
+            setTimeout(() => {
+            anleitung.style.display = 'none';
+            if (hilfeButton) hilfeButton.style.display = 'block';
+            openedFromHelp = false; // zurücksetzen
+            }, 500); // passend zur CSS-Transition
+        }
+
+        // Hilfe öffnet die Anleitung im "Hilfe-Modus"
+        hilfeButton?.addEventListener('click', () => showAnleitung(true));
+
+        // X-Button schließt nur, ohne Start-Flow
+        closeButton?.addEventListener('click', hideAnleitung);
+
+        // Optional: ESC schließt nur, ohne Start-Flow
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && anleitung && anleitung.style.display !== 'none') {
+            hideAnleitung();
+            }
+        });
+
+        // WICHTIG: startExperience NICHT für Close missbrauchen.
+        // Sie bleibt ausschließlich für den echten Start-Flow zuständig.
+        // Falls du sie irgendwo wrapst, entferne das Wrapping, das bei jedem "close" aufgerufen wird.
+        })();
     </script>
 </body>
 </html>
