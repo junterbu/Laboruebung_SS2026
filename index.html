@@ -256,6 +256,23 @@
     <button id="toProberaum" style="display: none;">Zum Proberaum</button>
     <button id="toLager" style="display: none;">Zum Lager</button>
 
+    <button id="hilfeButton" style="
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    ">
+        Hilfe
+    </button>
+
     <!--Schieberegler-->
     <div id="uiContainer" style="display: none; position: absolute; top: 10px; left: 10px; background-color: white; padding: 10px; border: 1px solid black;">
         <label for="percentRange">Prozentsatz aus Kübel:</label>
@@ -283,7 +300,7 @@
     </div>
     <div id="AnleitungContainer" class="fade-in" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-        text-align: left; font-family: 'Arial', sans-serif; max-width: 600px;">
+        text-align: left; font-family: 'Arial', sans-serif; max-width: 600px; z-index: 2000;">
 
         <h2 style="text-align: center; color: #333;">Willkommen im virtuellen Asphaltlabor</h2>
         

@@ -288,30 +288,45 @@ function startExperience() {
     }, 500);
 }
 
+// zeigt die Anleitung wieder an
 function showAnleitung() {
-    anleitung.style.display = 'block';
-    anleitung.style.zIndex  = '2000';     // sicher über allem
-    anleitung.classList.remove('fade-out');
-    anleitung.classList.add('fade-in');
-    hilfeButton.style.display = 'none';
+  const anleitung = document.getElementById('AnleitungContainer');
+  const hilfeButton = document.getElementById('hilfeButton');
+
+  if (!anleitung) return; // failsafe
+
+  anleitung.style.display = 'block';
+  anleitung.classList.remove('fade-out'); // wichtig: entfernt pointer-events:none
+  anleitung.classList.add('fade-in');
+
+  if (hilfeButton) hilfeButton.style.display = 'none';
 }
 
+// blendet die Anleitung aus (nach "Start")
 function hideAnleitung() {
-    anleitung.classList.remove('fade-in');
-    anleitung.classList.add('fade-out');
-    // Warte kurz bis die Transition fertig ist, dann ausblenden
-    setTimeout(() => {
-      anleitung.style.display = 'none';
-      hilfeButton.style.display = 'block';
-    }, 300); // muss zu deiner CSS-Transition passen
+  const anleitung = document.getElementById('AnleitungContainer');
+  const hilfeButton = document.getElementById('hilfeButton');
+
+  if (!anleitung) return;
+
+  anleitung.classList.remove('fade-in');
+  anleitung.classList.add('fade-out');
+
+  // Warte auf deine CSS-Transition (0.5s in .fade-out)
+  setTimeout(() => {
+    anleitung.style.display = 'none';
+    if (hilfeButton) hilfeButton.style.display = 'block';
+  }, 500);
 }
 
-hilfeButton.addEventListener('click', showAnleitung);
+document.getElementById('hilfeButton')?.addEventListener('click', showAnleitung);
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && anleitung.style.display !== 'none') {
-        hideAnleitung();
-    }
-});
+const originalStartExperience = window.startExperience;
+window.startExperience = function(...args) {
+  hideAnleitung();
+  if (typeof originalStartExperience === 'function') {
+    return originalStartExperience.apply(this, args);
+  }
+};
 
 window.startExperience = startExperience;
