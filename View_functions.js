@@ -722,16 +722,16 @@ if (LOW_END) {
   // keinen HDR-Hintergrund laden, keine Reflections, kleinere Texturen
 }
 
-window.addEventListener("keydown", function(event) {
-    if (event.key === "l" || event.key === "L") {
-        jumpToLager();
-    }
-    if (event.key === "g" || event.key === "G") {
-        jumpToGesteinsraum(); // ebenfalls definieren
-    }
-    if (event.key === "m" || event.key === "M") {
-        jumpToMischraum(); // ebenfalls definieren
-    }
-});
+// window.addEventListener("keydown", function(event) {
+//     if (event.key === "l" || event.key === "L") {
+//         jumpToLager();
+//     }
+//     if (event.key === "g" || event.key === "G") {
+//         jumpToGesteinsraum(); // ebenfalls definieren
+//     }
+//     if (event.key === "m" || event.key === "M") {
+//         jumpToMischraum(); // ebenfalls definieren
+//     }
+// });
 
 export { jumpToGesteinsraum, jumpToMischraum }
