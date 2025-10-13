@@ -351,15 +351,22 @@
     <div id="userIdContainer" class="fade-in" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         text-align: center; font-family: 'Arial', sans-serif;">
-        <p style="font-size: 16px; font-weight: bold; color: #333;">Bitte Ihre Matrikelnummer eingeben:</p>
-        <input type="text" id="userIdInput" placeholder="Matrikelnummer" 
-            style="width: 200px; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center;">
-        <input type="password" id="passwordInput" placeholder="Passwort" 
-            style="width: 200px; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center; margin-top: 10px;">
-        <br><br>
-        <button onclick="handleLogin()"
-        style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;
-        cursor: pointer; font-size: 16px;">Login</button>
+        
+        <p style="font-size: 16px; font-weight: bold; color: #333;">Bitte Anmeldedaten eingeben:</p>
+
+        <!-- Formular beginnt hier -->
+        <form id="loginForm" onsubmit="handleLogin(); return false;">
+            <input type="text" id="userIdInput" placeholder="Matrikelnummer" required
+                style="width: 200px; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center;">
+            
+            <input type="password" id="passwordInput" placeholder="Passwort" required
+                style="width: 200px; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center; margin-top: 10px;">
+            
+            <br><br>
+            <button type="submit"
+                style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;
+                cursor: pointer; font-size: 16px;">Login</button>
+        </form>
     </div>
     <script type="module">
         async function fetchData() {
