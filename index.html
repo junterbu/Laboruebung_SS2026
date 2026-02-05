@@ -218,6 +218,42 @@
             opacity: 1;
             transition: opacity 0.5s ease;
         }
+
+        #AnleitungContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            font-family: 'Arial', sans-serif;
+            z-index: 2000;
+            
+            /* WICHTIGE ÄNDERUNGEN FÜR MOBILE: */
+            width: 90%;              /* Breite passt sich an */
+            max-width: 600px;        /* Nicht zu breit auf Desktop */
+            max-height: 85vh;        /* Maximal 85% der Bildschirmhöhe */
+            display: flex;           /* Flexbox aktiviert */
+            flex-direction: column;  /* Elemente untereinander */
+        }
+
+        /* Neuer Style für den scrollbaren Textbereich */
+        #AnleitungContent {
+            overflow-y: auto;        /* Scrollbar wenn nötig */
+            flex-grow: 1;            /* Nimmt den verfügbaren Platz ein */
+            margin-bottom: 15px;     /* Abstand zum Start-Button */
+            padding-right: 5px;      /* Platz für Scrollbar */
+        }
+
+        /* Button Container fixieren */
+        #AnleitungFooter {
+            flex-shrink: 0;          /* Darf nicht schrumpfen */
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -298,11 +334,9 @@
         <p id="quizFrage"></p>
         <div id="quizOptionen"></div>
     </div>
-    <div id="AnleitungContainer" class="fade-in" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-        text-align: left; font-family: 'Arial', sans-serif; max-width: 600px; z-index: 2000;">
+    <div id="AnleitungContainer" class="fade-in">
 
-        <h2 style="text-align: center; color: #333;">Willkommen im virtuellen Asphaltlabor</h2>
+        <h2 style="text-align: center; color: #333; margin-top: 0;">Willkommen im virtuellen Asphaltlabor</h2>
 
         <button id="anleitungClose" style="
         display:none;
@@ -320,31 +354,33 @@
         text-align:center;
         ">×</button>
         
-        <p style="font-size: 15px; color: #333;">
-            Diese Plattform ermöglicht Ihnen die praktische Simulation der Erstellung einer Asphaltmischung. 
-            Bitte beachten Sie die folgenden Anweisungen für eine erfolgreiche Durchführung:
-        </p>
+        <div id="AnleitungContent">
+            <p style="font-size: 15px; color: #333;">
+                Diese Plattform ermöglicht Ihnen die praktische Simulation der Erstellung einer Asphaltmischung. 
+                Bitte beachten Sie die folgenden Anweisungen für eine erfolgreiche Durchführung:
+            </p>
 
-        <ol style="font-size: 14px; color: #333; padding-left: 20px;">
-            <li><strong>Anmeldung:</strong> Geben Sie eine beliebige Nummer zur Systemanmeldung ein.</li>
-            <li><strong>Laborzugang:</strong> Schwenken Sie die Ansicht und klicken Sie auf „Start“, um das Labor zu betreten.</li>
-            <li><strong>Materialbereitstellung:</strong> Im Lager wählen Sie Kübel durch Klicken auf die zugehörigen Schilder aus und transferieren diese in den Gesteinsraum.</li>
-            <li><strong>Gesteinsraum:</strong> Wechseln Sie über „Zum Gesteinsraum“. Beachten Sie die angezeigten Fragen.</li>
-            <li><strong>Mischgut-Auswahl:</strong> Wählen Sie mittels „Bitte klicken“ ein Asphaltmischgut. Die Diagrammgrenzen passen sich an.</li>
-            <li><strong>Sieblinien-Anpassung:</strong> Justieren Sie die Sieblinie innerhalb der Grenzbereiche, indem Sie Anteile der Kübel anklicken und den Schieberegler (oben links) verwenden.</li>
-            <li><strong>Mischraum:</strong> Bei korrekter Sieblinie klicken Sie auf „Zum Mischraum“ (ggf. Ansicht drehen). Beantworten Sie die dortigen Fragen.</li>
-            <li><strong>Bitumengehalt & Rohdichte:</strong> Im Mischraum stellen Sie den Bitumengehalt (Schieberegler oben links) ein und stellen ein entsprechendes Mischgut her (grüner Knopf) für das die Rohdichte ausgegeben wird. Dies ist dreimal mit variierendem Bitumengehalt durchzuführen.</li>
-            <li><strong>Marshall-Verdichter & Bericht:</strong> Wechseln Sie zum Marshall-Verdichter (Fragen beachten) und starten Sie ihn mit dem grünen Knopf. Ein Laborbericht wird generiert.</li>
-        </ol>
+            <ol style="font-size: 14px; color: #333; padding-left: 20px;">
+                <li><strong>Anmeldung:</strong> Geben Sie eine beliebige Nummer zur Systemanmeldung ein.</li>
+                <li><strong>Laborzugang:</strong> Schwenken Sie die Ansicht und klicken Sie auf „Start“, um das Labor zu betreten.</li>
+                <li><strong>Materialbereitstellung:</strong> Im Lager wählen Sie Kübel durch Klicken auf die zugehörigen Schilder aus und transferieren diese in den Gesteinsraum.</li>
+                <li><strong>Gesteinsraum:</strong> Wechseln Sie über „Zum Gesteinsraum“. Beachten Sie die angezeigten Fragen.</li>
+                <li><strong>Mischgut-Auswahl:</strong> Wählen Sie mittels „Bitte klicken“ ein Asphaltmischgut. Die Diagrammgrenzen passen sich an.</li>
+                <li><strong>Sieblinien-Anpassung:</strong> Justieren Sie die Sieblinie innerhalb der Grenzbereiche, indem Sie Anteile der Kübel anklicken und den Schieberegler (oben links) verwenden.</li>
+                <li><strong>Mischraum:</strong> Bei korrekter Sieblinie klicken Sie auf „Zum Mischraum“ (ggf. Ansicht drehen). Beantworten Sie die dortigen Fragen.</li>
+                <li><strong>Bitumengehalt & Rohdichte:</strong> Im Mischraum stellen Sie den Bitumengehalt (Schieberegler oben links) ein und stellen ein entsprechendes Mischgut her (grüner Knopf) für das die Rohdichte ausgegeben wird. Dies ist dreimal mit variierendem Bitumengehalt durchzuführen.</li>
+                <li><strong>Marshall-Verdichter & Bericht:</strong> Wechseln Sie zum Marshall-Verdichter (Fragen beachten) und starten Sie ihn mit dem grünen Knopf. Ein Laborbericht wird generiert.</li>
+            </ol>
 
-        <p style="font-size: 15px; color: #333; text-align: center; font-weight: bold;">
-            Viel Spaß im virtuellen Labor!
-        </p>
+            <p style="font-size: 15px; color: #333; text-align: center; font-weight: bold;">
+                Viel Spaß im virtuellen Labor!
+            </p>
+        </div>
 
-        <div style="text-align: center; margin-top: 20px;">
+        <div id="AnleitungFooter">
             <button onclick="startExperience()" 
                 style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;
-                cursor: pointer; font-size: 16px;">Start</button>
+                cursor: pointer; font-size: 16px; width: 100%; max-width: 200px;">Start</button>
         </div>
     </div>
 
@@ -495,7 +531,6 @@
 
         // WICHTIG: startExperience NICHT für Close missbrauchen.
         // Sie bleibt ausschließlich für den echten Start-Flow zuständig.
-        // Falls du sie irgendwo wrapst, entferne das Wrapping, das bei jedem "close" aufgerufen wird.
         })();
     </script>
 </body>
