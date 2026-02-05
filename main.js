@@ -216,6 +216,14 @@ function unlockRoom(room) {
 
 // Auf Raumwechsel reagieren
 window.addEventListener('roomChanged', (e) => {
+    // Wenn der Raum "Lager" ist, zeige die Progress Bar an
+    if (e.detail === 'Lager') {
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.display = 'flex';
+        }
+    }
+    
     unlockRoom(e.detail);
 });
 
