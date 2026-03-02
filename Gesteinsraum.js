@@ -183,7 +183,6 @@ document.getElementById('percentRange').addEventListener('input', function() {
     // Prüfen, ob Gesamtprozentsatz überschritten wird
     const difference = selectedValue - eimerWerte[eimerName];
     if (totalProzent + difference > 100) {
-      alert("Du kannst insgesamt nur maximal 100% entnehmen.");
       this.value = eimerWerte[eimerName]; // Zurücksetzen auf vorherigen Wert
       return;
     }
