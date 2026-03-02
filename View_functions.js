@@ -143,8 +143,8 @@ function handleMarkerClick(marker) {
     } 
 }
 
-// WebXR-Button hinzufügen
-document.body.appendChild(VRButton.createButton(renderer));
+// // WebXR-Button hinzufügen
+// document.body.appendChild(VRButton.createButton(renderer));
 
 // AR View für non IOS
 export function startARView() {
