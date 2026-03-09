@@ -171,6 +171,8 @@ function setUserId() {
 
 let beantworteteRäume = new Set();
 
+// Ersetze die Funktion zeigeQuiz in Marker.js durch diese Version:
+
 export async function zeigeQuiz(raum) {
     return new Promise(async (resolve) => {
         const userId = localStorage.getItem("userId");
@@ -193,9 +195,17 @@ export async function zeigeQuiz(raum) {
             const frageObjekt = quizFragen[raum];
             document.getElementById("quizFrage").innerText = frageObjekt.frage;
             const optionenContainer = document.getElementById("quizOptionen");
+            const nextButton = document.getElementById("quizNext"); // Der neue Button
+            
             optionenContainer.innerHTML = "";
+            let gewaehlteAntwort = null;
 
-            // >>> NEU: pro Aufruf mischen (ohne Original zu verändern)
+            // Button zurücksetzen
+            nextButton.disabled = true;
+            nextButton.style.cursor = "not-allowed";
+            nextButton.style.opacity = "0.5";
+            nextButton.innerText = "Bestätigen & Weiter";
+
             const shuffledOptions = shuffleArray(frageObjekt.optionen);
 
             shuffledOptions.forEach(option => {
@@ -203,31 +213,53 @@ export async function zeigeQuiz(raum) {
                 button.innerText = option;
                 button.classList.add("quiz-option");
 
-                // optional: Doppel-Klicks verhindern
-                button.addEventListener("click", async () => {
-                // Buttons sofort deaktivieren, um Mehrfachklicks zu vermeiden
-                optionenContainer.querySelectorAll("button").forEach(b => b.disabled = true);
+                button.addEventListener("click", () => {
+                    // Alle anderen Buttons deselektieren
+                    optionenContainer.querySelectorAll(".quiz-option").forEach(b => b.classList.remove("selected"));
+                    
+                    // Aktuellen Button markieren
+                    button.classList.add("selected");
+                    gewaehlteAntwort = option;
 
-                const korrekt = frageObjekt.antwort === option;
-                const punkte = korrekt ? 10 : 0;
-
-                await sendQuizAnswer(
-                    userId,
-                    raum,
-                    option,
-                    punkte,
-                    frageObjekt.frage,
-                    frageObjekt.antwort
-                );
-
-                schließeQuiz();
-                resolve();
+                    // "Weiter"-Button aktivieren
+                    nextButton.disabled = false;
+                    nextButton.style.cursor = "pointer";
+                    nextButton.style.opacity = "1";
                 });
 
                 optionenContainer.appendChild(button);
             });
 
-        document.getElementById("quizContainer").style.display = "block";
+            // Event-Listener für den "Weiter"-Button (einmalig für diesen Aufruf)
+            const handleNextClick = async () => {
+                if (!gewaehlteAntwort) return;
+
+                // UI sperren während des Sendens
+                nextButton.disabled = true;
+                optionenContainer.querySelectorAll("button").forEach(b => b.disabled = true);
+
+                const korrekt = frageObjekt.antwort === gewaehlteAntwort;
+                const punkte = korrekt ? 10 : 0;
+
+                await sendQuizAnswer(
+                    userId,
+                    raum,
+                    gewaehlteAntwort,
+                    punkte,
+                    frageObjekt.frage,
+                    frageObjekt.antwort
+                );
+
+                // Aufräumen: Event Listener entfernen, damit er beim nächsten Raum nicht doppelt feuert
+                nextButton.removeEventListener("click", handleNextClick);
+                
+                schließeQuiz();
+                resolve();
+            };
+
+            nextButton.addEventListener("click", handleNextClick);
+
+            document.getElementById("quizContainer").style.display = "block";
         }
     });
 }
