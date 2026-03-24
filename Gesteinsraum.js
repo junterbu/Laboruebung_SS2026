@@ -15,9 +15,9 @@ let mischungsGrenzen = {
         obereGrenze: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         untereGrenze: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
-    "AC 11 deck A1": {
-        obereGrenze: [10, 16, 22, 29, 38, 50, 67, 88, 100, 100, 100, 100, 100],
-        untereGrenze: [5, 7.5, 10, 13, 19, 30, 43, 65, 90, 100, 100, 100, 100],
+    "AC 11 deck A2": {
+        obereGrenze: [10, 18, 25, 34, 47, 65, 75, 88, 100, 100, 100, 100, 100],
+        untereGrenze: [5, 8, 12, 19, 32, 49, 59, 72, 90, 100, 100, 100, 100],
     },
     "AC 22 bin H1": {
         obereGrenze: [7.5, 15.25, 23, 29, 36, 45, 55, 68, 76, 85, 100, 100, 100],
@@ -27,10 +27,10 @@ let mischungsGrenzen = {
         obereGrenze: [9, 14.5, 20, 27, 35, 45, 55, 66, 72, 80, 88, 100, 100],
         untereGrenze: [4, 5.5, 7, 9, 13, 20, 27, 40, 47, 55, 70, 90, 100],
     },
-    // "SMA 11 deck S3": {
-    //     obereGrenze: [9, 12, 15, 20, 25, 30, 38, 70, 100, 100, 100, 100, 100],
-    //     untereGrenze: [5, 6, 7, 8, 10, 15, 22, 45, 90, 100, 100, 100, 100],
-    // },
+    "SMA 11 deck S3": {
+        obereGrenze: [9, 12, 15, 20, 25, 30, 38, 70, 100, 100, 100, 100, 100],
+        untereGrenze: [5, 6, 7, 8, 10, 15, 22, 45, 90, 100, 100, 100, 100],
+    },
     // Weitere Mischungen hier hinzufügen
 };
 
@@ -143,14 +143,14 @@ scene.add(anleitungMeshProberaum);
 
 // Globale Variablen
 export let eimerWerte = {
-    'Füller': 0,
-    '0/2': 0,
-    '2/4': 0,
-    '4/8': 0,
-    '8/11': 0,
-    '11/16': 0,
-    '16/22': 0,
-    '22/32': 0
+    'Füller': 0.001,
+    '0/2': 0.001,
+    '2/4': 0.001,
+    '4/8': 0.001,
+    '8/11': 0.001,
+    '11/16': 0.001,
+    '16/22': 0.001,
+    '22/32': 0.001
 };
 
 export let currentEimer = null;  // Diese Variable muss global initialisiert werden
