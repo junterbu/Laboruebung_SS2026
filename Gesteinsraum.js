@@ -143,14 +143,14 @@ scene.add(anleitungMeshProberaum);
 
 // Globale Variablen
 export let eimerWerte = {
-    'Füller': 0.001,
-    '0/2': 0.001,
-    '2/4': 0.001,
-    '4/8': 0.001,
-    '8/11': 0.001,
-    '11/16': 0.001,
-    '16/22': 0.001,
-    '22/32': 0.001
+    'Füller': 1,
+    '0/2': 1,
+    '2/4': 1,
+    '4/8': 1,
+    '8/11': 1,
+    '11/16': 1,
+    '16/22': 1,
+    '22/32': 1
 };
 
 export let currentEimer = null;  // Diese Variable muss global initialisiert werden
