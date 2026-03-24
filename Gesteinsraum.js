@@ -37,6 +37,7 @@ let mischungsGrenzen = {
 let aktuelleGrenzen = mischungsGrenzen["Bitte klicken"]; // Standardwert
 let mixNames = ["Bitte klicken", "AC 11 deck A1", "AC 22 bin H1", "AC 32 trag T3", "SMA 11 deck S3"]
 let currentMixIndex = 0
+export let selectedMix ="Bitte klicken"
 
 // Raycaster und Mauskoordinaten definieren
 let raycaster = new THREE.Raycaster();
@@ -143,14 +144,14 @@ scene.add(anleitungMeshProberaum);
 
 // Globale Variablen
 export let eimerWerte = {
-    'Füller': 1,
-    '0/2': 1,
-    '2/4': 1,
-    '4/8': 1,
-    '8/11': 1,
-    '11/16': 1,
-    '16/22': 1,
-    '22/32': 1
+    'Füller': 0,
+    '0/2': 0,
+    '2/4': 0,
+    '4/8': 0,
+    '8/11': 0,
+    '11/16': 0,
+    '16/22': 0,
+    '22/32': 0
 };
 
 export let currentEimer = null;  // Diese Variable muss global initialisiert werden
@@ -429,7 +430,7 @@ function aktualisiereSieblinie() {
     textureSieblinie.needsUpdate = true;  // Aktualisiere die Textur in der Szene
 
     // Überprüfen, ob die Sieblinie innerhalb der Grenzen liegt
-    if (SieblinienGrenzanalyse(neueSieblinie) == true) {
+    if (selectedMix !== "Bitte klicken" && SieblinienGrenzanalyse(neueSieblinie) === true) {
         toMischraumMarker.visible = true; // Marker sichtbar machen
     } else {
         toMischraumMarker.visible = false; // Marker verstecken
@@ -439,6 +440,7 @@ function aktualisiereSieblinie() {
 } 
 
 zeigeSieblinieMarker();
+toMischraumMarker.visible = false;
 
 function SieblinienGrenzanalyse(sieblinie) {
     let obereGrenze = aktuelleGrenzen.obereGrenze;
@@ -528,8 +530,6 @@ scene.add(selectionPlane);
 
 // Initialer Text auf der Plane
 updatePlaneLabel("Bitte klicken");
-
-export let selectedMix ="Bitte klicken"
 
 window.addEventListener(inputEvent, function(event) {
     const mouse = new THREE.Vector2();
