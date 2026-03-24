@@ -1,0 +1,14 @@
+name: Keep Supabase Awake
+
+on:
+  schedule:
+    # Läuft jeden 3. Tag um 12:00 Uhr mittags (UTC)
+    - cron: '0 12 */3 * *'
+  workflow_dispatch: # Erlaubt dir, den Ping jederzeit manuell per Knopfdruck zu testen
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend Endpoint
+        run: curl -s https://backend-test-phase.vercel.app/api/keepalive
