@@ -35,7 +35,7 @@ let mischungsGrenzen = {
 };
 
 let aktuelleGrenzen = mischungsGrenzen["Bitte klicken"]; // Standardwert
-let mixNames = ["Bitte klicken", "AC 11 deck A1", "AC 22 bin H1", "AC 32 trag T3", "SMA 11 deck S3"]
+let mixNames = ["Bitte klicken", "AC 11 deck A2", "AC 22 bin H1", "AC 32 trag T3", "SMA 11 deck S3"]
 let currentMixIndex = 0
 export let selectedMix ="Bitte klicken"
 
